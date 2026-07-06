@@ -1,0 +1,78 @@
+/* ============================================================
+   CategoryItem Component — Styles
+   ============================================================ */
+
+.category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 10px;
+  border-radius: var(--radius-input);
+  cursor: pointer;
+  transition: background 0.1s;
+  gap: var(--gap-sm);
+}
+
+
+.category-item.active {
+  background: var(--text);
+}
+
+.category-item.active .category-item__name,
+.category-item.active .category-item__count {
+  color: var(--bg);
+}
+
+.category-item__name {
+  font-size: var(--font-body);
+  font-weight: 400;
+  color: var(--text);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category-item__count {
+  font-size: var(--font-small);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.category-item__actions {
+  display: none;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+
+
+.category-item.active .category-item__actions {
+  display: flex;
+}
+
+.category-item__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: background 0.1s, color 0.1s;
+}
+
+.category-item.active .category-item__btn {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+
+
+.category-item.active .category-item__btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--bg);
+}

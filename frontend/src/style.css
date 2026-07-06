@@ -1,0 +1,236 @@
+/* ============================================================
+   Global Design Tokens & Reset
+   Spec: White/Black minimal — Inter font
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* --- Design Tokens --- */
+:root {
+  /* Colors */
+  --bg:            #FFFFFF;
+  --surface:       #FAFAFA;
+  --border:        #E5E5E5;
+  --border-strong: #D4D4D4;
+  --text:          #171717;
+  --text-secondary:#737373;
+  --text-muted:    #A3A3A3;
+  --accent:        #171717;
+
+  /* Typography */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-h1:     22px;
+  --font-h2:     16px;
+  --font-body:   15px;
+  --font-small:  13px;
+  --font-tiny:   12px;
+  --line-height: 1.5;
+
+  /* Spacing */
+  --gap-sm:  8px;
+  --gap-md:  12px;
+  --gap-lg:  20px;
+
+  /* Radius */
+  --radius-input: 6px;
+  --radius-card:  10px;
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  height: 100%;
+  font-family: var(--font-family);
+  font-size: var(--font-body);
+  font-weight: 400;
+  line-height: var(--line-height);
+  color: var(--text);
+  background: var(--bg);
+}
+
+button, input, textarea, select {
+  font-family: var(--font-family);
+}
+
+/* --- App Layout --- */
+#app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* --- Scrollbar Global --- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+/* --- Utility --- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* --- Sidebar Backdrop (mobile) --- */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 49;
+  animation: overlay-in 0.15s ease;
+}
+
+.sidebar-backdrop.visible {
+  display: block;
+}
+
+/* ============================================================
+   Responsive — Mobile First
+   ============================================================ */
+
+/* Hamburger menu button — ẩn trên desktop, hiện trên mobile */
+.header__menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: var(--radius-input);
+  cursor: pointer;
+  color: var(--text);
+  flex-shrink: 0;
+  transition: border-color 0.15s;
+}
+
+.header__menu-btn:hover {
+  border-color: var(--border-strong);
+}
+
+/* Tablet & small desktop (≤ 768px) */
+@media (max-width: 768px) {
+  .header__search {
+    max-width: 100%;
+  }
+}
+
+/* Mobile (≤ 640px) */
+@media (max-width: 640px) {
+  /* Show hamburger button */
+  .header__menu-btn {
+    display: flex;
+  }
+
+  /* Sidebar: drawer overlay */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+    background: var(--bg);
+    height: 100dvh;
+    width: 260px;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Task panel takes full width */
+  .task-panel {
+    width: 100%;
+  }
+
+  /* Header adjustments */
+  .header__inner {
+    padding: 0 12px;
+    gap: 10px;
+    height: 52px;
+  }
+
+  .header__search {
+    flex: 1;
+  }
+
+  /* Hide shortcut hint on mobile */
+  .header__shortcut {
+    display: none !important;
+  }
+
+  /* Search input padding (no shortcut kbd) */
+  .header__search-input {
+    padding: 0 10px 0 34px;
+  }
+
+  /* New task button: icon only on very small screens */
+  .header__new-btn-text {
+    display: none;
+  }
+
+  .header__new-btn {
+    padding: 0 10px;
+    gap: 0;
+  }
+
+  /* Task panel header */
+  .task-panel__header {
+    padding: 14px 12px 10px;
+  }
+
+  .task-panel__content {
+    padding: 0 12px 12px;
+  }
+
+  /* Task panel toolbar wrapping */
+  .task-panel__toolbar {
+    gap: 6px;
+  }
+
+  /* Modal: slide up from bottom */
+  .modal {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 16px 16px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  @keyframes modal-in {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+}
