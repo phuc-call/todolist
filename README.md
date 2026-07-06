@@ -42,7 +42,7 @@ Kiểm tra xem máy đã có Git chưa bằng lệnh:
 git --version
 ```
 - Nếu chưa có, tải tại: https://git-scm.com/downloads và cài đặt.
-- Sau đó, tải project về máy tính bằng lệnh:
+- Mở Command Prompt (cmd) và clone project về máy bằng lệnh:
 ```bash
 git clone https://github.com/phuc-call/todolist
 ```
